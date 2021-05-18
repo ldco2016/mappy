@@ -1,7 +1,6 @@
 import { rawData } from "./csvFileReader";
 
 export class Designation {
-  // Address: string;
   General_Plan_Designation: string;
   Latitude: number;
   Longitude: number;
@@ -15,6 +14,10 @@ export class Designation {
     this.General_Plan_Designation = data[1];
     this.Latitude = parseFloat(data[2]);
     this.Longitude = parseFloat(data[3]);
+  }
+
+  markerContent(): string {
+    return `<h3>Planned Designation: ${this.General_Plan_Designation}</h3>`;
   }
 }
 

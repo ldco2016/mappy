@@ -1,6 +1,7 @@
-import { readFileSync } from "fs";
+import { rawData } from "./csvFileReader";
+import { Mappable } from "./CustomMap";
 
-export class Data {
+export class Data implements Mappable {
   Address: string;
   General_Plan_Designation: string;
   Latitude: number;
@@ -16,18 +17,21 @@ export class Data {
     this.Latitude = parseFloat(data[2]);
     this.Longitude = parseFloat(data[3]);
   }
+
+  markerContent(): string {
+    return `
+    <div>
+      <h1>Address: ${this.Address}</h1>
+      <h2>Density: ${this.General_Plan_Designation}</h2>
+    </div>
+    `;
+  }
 }
 
 const ROW_DELIMITER = "\r\n";
-
-export const rawData = readFileSync("src/Cales_trim_down.csv", {
-  encoding: "utf-8",
-});
 
 const data: Data[] = [];
 
 for (const rawRow of rawData.split(ROW_DELIMITER)) {
   data.push(new Data(rawRow));
 }
-
-// console.log(data);

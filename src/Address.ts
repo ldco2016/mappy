@@ -16,6 +16,10 @@ export class Address {
     this.Latitude = parseFloat(data[2]);
     this.Longitude = parseFloat(data[3]);
   }
+
+  markerContent(): string {
+    return `<h1>Address: ${this.Address}</h1>`;
+  }
 }
 
 const ROW_DELIMITER = "\r\n";
